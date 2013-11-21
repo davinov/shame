@@ -1,3 +1,19 @@
+# Shame
+A website to share epic sentences out of their context
+
+## Installation
+* Install npm/node and brunch
+* Install CouchDB `sudo apt-get install couchdb -y`
+  * Navigate in [CouchDB Futon interface](http://localhost:5984/_utils)
+  * Create the database `shame-quotes`
+  * In configuration, set `httpd.enable_cors` to `true`
+  * Add the key `cors.origins` with the value `localhost:3333` or `*` if lazy
+* install dependencies and generate the project files `npm install`
+
+## Usage
+`npm start` to start development server
+
+Created with:
 # angular-brunch-seed
 ### A starter project for AngularJS using Brunch.io
 

@@ -1,0 +1,59 @@
+.quote{
+  .clearfix;
+  position: relative;
+
+  p.text{
+    &:before{
+      .text-muted;
+      content: '\201C';
+      font-size: @font-size-h2;
+      margin-right: .25em;
+      line-height: @line-height-base * 0.5;
+    }
+  }
+  .author{
+    .text-muted;
+    font-size: 85%;
+    &:before{
+      content: '\2014 \00A0';
+    }
+  }
+  .actions{
+    @media (max-width: @screen-sm-min) {
+      display: block;
+      span{
+        display: none;
+      }
+    }
+    position: absolute;
+    right:0;
+    bottom:0;
+    a, button {
+      .btn;
+      .btn-link;
+      .btn-xs;
+    }
+  }
+
+  form{
+    label{
+      .sr-only;
+    }
+    .text{
+      .form-control;
+      .make-xs-column(12);
+      height: 5em;
+    }
+    .author{
+      .form-control;
+      .make-sm-column(6);
+    }
+    button{
+      .btn;
+      .btn-default;
+      .btn-block;
+      .make-sm-column-offset(5);
+      .make-sm-column(1);
+    }
+  }
+}
