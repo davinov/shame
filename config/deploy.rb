@@ -17,24 +17,31 @@ set :pty, true
 # set :keep_releases, 5
 
 namespace :deploy do
-  desc 'Install dependencies'
-  task :install do
-    on roles(:app), in: :sequence, wait: 5 do
-      within "#{release_path}" do
-        execute :npm, 'install'
+
+  namespace :npm do
+
+    desc 'Install dependencies'
+    task :install do
+      on roles(:app), in: :sequence, wait: 5 do
+        within "#{release_path}" do
+          execute :npm, 'install'
+        end
       end
     end
+
+  after "deploy:npm:install", "deploy:restart"
+
   end
 
   desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      within "#{release_path}" do
-        execute :npm, 'stop'
-        execute :npm, 'start'
+    task :restart do
+      on roles(:app), in: :sequence, wait: 5 do
+        within "#{release_path}" do
+          execute :npm, 'stop'
+          execute :npm, 'start'
+        end
       end
     end
-  end
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do

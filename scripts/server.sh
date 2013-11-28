@@ -1,3 +1,5 @@
 #!/bin/bash
 
-node_modules/.bin/forever start -c coffee _server.coffee
+rm -rf _public
+node_modules/.bin/brunch build -P
+node_modules/.bin/forever restart -c coffee _server.coffee
