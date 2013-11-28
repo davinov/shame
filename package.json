@@ -9,10 +9,13 @@
     "url": "git@github.com:davinov/shame.git"
   },
   "scripts": {
-    "init": "scripts/init.sh",
+    "preinstall": "scripts/clean.sh",
+    "postinstall": "scripts/install.sh",
+    "postupdate": "scripts/install.sh",
     "start": "scripts/server.sh",
-    "build": "scripts/production.sh",
-    "test": "scripts/test.sh"
+    "stop": "scripts/stop.sh",
+    "test": "scripts/test.sh",
+    "build": "scripts/production.sh"
   },
   "dependencies": {
     "jade": "~0.33",
@@ -34,7 +37,9 @@
     "config": "~0.4.33",
     "cradle": "~0.6.6",
     "express": "~3.4.4",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "pm2": "~0.6.8",
+    "forever": "~0.10.9"
   },
   "devDependencies": {
     "karma-coverage": "~0.1.2"

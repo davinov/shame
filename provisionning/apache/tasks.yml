@@ -1,0 +1,13 @@
+---
+- name: Apache | Install
+  apt: pkg=$item state=latest update_cache=yes
+  with_items:
+  - apache2
+
+- name: Apache | Virtualhost add | Push virtualhost configuration template
+  template: src=apache/vhost dest=/etc/apache2/sites-available/$host
+
+- name: Apache | Virtualhost add | Activate virtual host $vhost
+  command: /usr/sbin/a2ensite $host creates=/etc/apache2/sites-enabled/$host
+  notify:
+  - apache-reload

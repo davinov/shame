@@ -10,7 +10,7 @@ shameApi.use express.bodyParser()
 # Frontend
 shameApi.use express.static path.join __dirname, "../_public"
 
-#API routes
+# API routes
 shameApi.use express.logger()
 shameApi.get '/feed', Quote.list
 shameApi.get '/quote/:id', Quote.get

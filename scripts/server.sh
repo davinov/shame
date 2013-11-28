@@ -1,4 +1,3 @@
 #!/bin/bash
 
-rm -rf _public
-node_modules/.bin/brunch watch --server
+node_modules/.bin/forever start -c coffee _server.coffee

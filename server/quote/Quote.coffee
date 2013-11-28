@@ -8,7 +8,7 @@ db = shameDB.database dbName
 db.exists (err, exists) ->
   return console.log 'error', err if err
   return if exists
-  console.log 'Creating database'+ shameDB.dbPrefix+'quotes'
+  console.log 'Creating database '+ shameDB.dbPrefix+'quotes'
   db.create()
   # populate design documents
 

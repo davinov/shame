@@ -1,0 +1,8 @@
+---
+- name: Node | Add Chris-Lea nodejs repository
+  apt_repository: repo="ppa:chris-lea/node.js"
+
+- name: Node | Install Node + NPM
+  apt: pkg=$item state=latest update_cache=yes
+  with_items:
+  - nodejs
