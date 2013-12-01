@@ -4,6 +4,7 @@
     port: 80
     host: shame.nowinsky.net
     docroot: /var/www/shame/current
+    nodeport: 3333
   sudo: yes
   tasks:
     - name: Apt | Install base packages

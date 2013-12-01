@@ -1,3 +1,5 @@
 #!/bin/bash
 
-node_modules/.bin/forever stop _server.coffee
+if node_modules/.bin/forever stopall; then
+    echo "Server stopped"
+fi;

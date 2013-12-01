@@ -20,6 +20,7 @@ shameApi.delete '/quote/:id', Quote.delete
 
 shameApi.start = (port = 3333, path, callback) ->
   shameApi.listen port, callback
+  console.log 'Server listening at port '+port
 
 shameApi.stop = (callback) ->
   shameApi.close callback

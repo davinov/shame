@@ -5,7 +5,6 @@
   - couchdb
   notify:
   - couchdb-restart
-  - apache-reload
 
 - name: CouchDB | Configure
   copy: src=couchdb/config.ini dest=/etc/couchdb/local.ini

@@ -10,6 +10,13 @@ cradle.setup {
 }
 shameDB = new(cradle.Connection)
 
-shameDB.dbPrefix = config.database.prefix
+dbName = config.database.prefix+'-quotes'
+db = shameDB.database dbName
+db.exists (err, exists) ->
+  return console.log 'error', err if err
+  return if exists
+  console.log 'Creating database '+ shameDB.dbName
+  db.create()
+  # populate design documents
 
 module.exports = shameDB
