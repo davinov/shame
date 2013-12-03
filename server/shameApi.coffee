@@ -9,6 +9,9 @@ shameApi.use express.bodyParser()
 
 # Frontend
 shameApi.use express.static path.join __dirname, "../_public"
+shameApi.get '/', (req, res) ->
+  res.sendfile 'index.html',
+    root: path.join __dirname, '../_public'
 
 # API routes
 shameApi.use express.logger()

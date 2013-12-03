@@ -1,16 +1,7 @@
-shameDB = require '../shameDB'
+db = require '../shameDB'
 _ = require 'underscore'
 
 Quote = {}
-
-dbName = shameDB.dbPrefix+'quotes'
-db = shameDB.database dbName
-db.exists (err, exists) ->
-  return console.log 'error', err if err
-  return if exists
-  console.log 'Creating database '+ shameDB.dbPrefix+'quotes'
-  db.create()
-  # populate design documents
 
 Quote.list = (req, res, next) ->
   db.all (err, data) ->
@@ -18,7 +9,6 @@ Quote.list = (req, res, next) ->
       { _id: doc.id }
 
 Quote.get = (req, res, next) ->
-  console.log req.params.id
   db.get req.params.id, (err, data) ->
     res.send data
 

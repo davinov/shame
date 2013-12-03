@@ -9,15 +9,14 @@ cradle.setup {
     password: config.password
 }
 
-couchDB = new(cradle.Connection)()
 dbName = config.prefix+'-quotes'
-
-shameDB = couchDB.databases dbName
+couchDB = new(cradle.Connection)()
+shameDB = couchDB.database dbName
 shameDB.exists (err, exists) ->
   return console.log 'error', err if err
   return if exists
   console.log 'Creating database '+ dbName
   shameDB.create()
-  # populate design documents
+  # Populate design documents
 
 module.exports = shameDB
