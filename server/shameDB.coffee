@@ -1,22 +1,23 @@
 cradle = require 'cradle'
-config = require 'config'
+config = require('config').database
 
 cradle.setup {
-  host: config.database.host
-  port: config.database.port
+  host: config.host
+  port: config.port
   auth:
-    username: config.database.user
-    password: config.database.password
+    username: config.user
+    password: config.password
 }
-shameDB = new(cradle.Connection)
 
-dbName = config.database.prefix+'-quotes'
-db = shameDB.database dbName
-db.exists (err, exists) ->
+couchDB = new(cradle.Connection)()
+dbName = config.prefix+'-quotes'
+
+shameDB = couchDB.databases dbName
+shameDB.exists (err, exists) ->
   return console.log 'error', err if err
   return if exists
-  console.log 'Creating database '+ shameDB.dbName
-  db.create()
+  console.log 'Creating database '+ dbName
+  shameDB.create()
   # populate design documents
 
 module.exports = shameDB
