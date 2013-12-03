@@ -1,6 +1,3 @@
 ---
-- name: couchdb-start
-  service: name=couchdb state=started enabled=yes
-
 - name: couchdb-restart
-  service: name=couchdb state=restarted enabled=yes
+  service: name=couchdb state=restarted

@@ -7,6 +7,6 @@
   - couchdb-restart
 
 - name: CouchDB | Configure
-  copy: src=couchdb/config.ini dest=/etc/couchdb/local.ini
+  template: src=couchdb/config.ini dest=/etc/couchdb/local.ini
   notify:
   - couchdb-restart

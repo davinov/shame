@@ -5,6 +5,8 @@
     host: shame.nowinsky.net
     docroot: /var/www/shame/current
     nodeport: 3333
+    couchuser: shame
+    couchpassword: prodPassword
   sudo: yes
   tasks:
     - name: Apt | Install base packages
