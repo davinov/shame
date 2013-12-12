@@ -17,18 +17,13 @@ angular
 
       $scope.delete = () ->
         $scope.quote.$delete (res) ->
-          if res.ok
-            $scope.alert =
-              type: "success"
-              message: "This quote have been successfully forgotten!"
-          else
-            $scope.alert =
-              type: "error"
-              message: "Error: " + res.reason
+          $scope.alert =
+            type: "success"
+            message: "This quote have been successfully forgotten!"
         , (err) ->
           $scope.alert =
             type: "error"
-            message: "Error: " + err
+            message: err.reason
     ]
   )
   .directive("shameQuote", ->
@@ -44,19 +39,15 @@ angular
       $scope.quote = new Quote()
       $scope.send = () ->
         $scope.quote.$save (res) ->
-          if res.ok
-            $scope.alert =
-              type: "success"
-              message: "Thank you for adding this quote!"
-            $scope.quote = new Quote()
-          else
-            $scope.alert =
-              type: "error"
-              message: "Error: " + res.reason
+          $scope.alert =
+            type: "success"
+            message: "Thank you for adding this quote!"
+          $scope.quote = new Quote()
         , (err) ->
           $scope.alert =
             type: "error"
-            message: "Error: " + err
+            message: "Error"
+          $scope.alert.message += ": " + err.data.reason if err.data.reason
     ]
   )
   .factory('Quote', [ '$resource', ($resource) ->

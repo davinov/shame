@@ -26,6 +26,6 @@ shameDB.exists (err, exists) ->
       validate_doc_update: (newDoc, oldDoc) ->
         if !newDoc.text? or !newDoc.text or newDoc.text == ''
           throw
-            forbidden: 'Quote must not be empty'
+            forbidden: 'Quote\ must\ not\ be\ empty'
 
 module.exports = shameDB
