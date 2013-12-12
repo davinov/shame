@@ -1,8 +1,9 @@
 angular
   .module("shame.quote", [
-    "alert"
+    "shame.alert"
     "ngRoute"
     "ngResource"
+    "shame.moment"
   ])
   .config(["$routeProvider", ($routeProvider) ->
     $routeProvider.when('/quote/:id', 

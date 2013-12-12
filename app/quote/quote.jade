@@ -1,7 +1,10 @@
 alert(alert="alert")
-blockquote.quote(ng-if="quote.text")
-  .text {{ quote.text }}
-  .author {{ quote.author }}
+blockquote
+  .quote 
+    span.author {{ quote.author }} 
+    span.text {{ quote.text }}
+  .infos reported 
+    time-ago(date="quote.creationDate")
   .actions
     button.delete(ng-click="delete()")
       i.glyphicon.glyphicon-remove

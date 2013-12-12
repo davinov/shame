@@ -1,19 +1,35 @@
-.quote{
+blockquote{
   .clearfix;
   position: relative;
 
-  p.text{
-    &:before{
+  .quote{
+    .author{
       .text-muted;
-      content: '\201C';
-      font-size: @font-size-h2;
-      margin-right: .25em;
-      line-height: @line-height-base * 0.5;
+      &:after{
+       content: ': ';
+      }
+    }
+
+    .text{
+      &:before, &:after{
+        .text-muted;
+        font-size: @font-size-h2;
+      }
+      @space-within-quotes: .25em;
+      &:before{
+        content: '\201C';
+        margin-right: @space-within-quotes;
+      }
+      &:after{
+       content: '\201D';
+       margin-left: @space-within-quotes;
+      }
     }
   }
-  .author{
+
+  .infos{
     .text-muted;
-    font-size: 85%;
+    .small;
     &:before{
       content: '\2014 \00A0';
     }

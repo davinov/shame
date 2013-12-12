@@ -4,7 +4,7 @@ _ = require 'underscore'
 User = {}
 
 User.list = (req, res, next) ->
-  db.all (err, data) ->
+  db.view 'quotes/all', (err, data) ->
     res.send _.map data, (doc) ->
       { _id: doc.id }
 
