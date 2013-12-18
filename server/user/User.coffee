@@ -4,26 +4,39 @@ _ = require 'underscore'
 User = {}
 
 User.list = (req, res, next) ->
-  db.view 'quotes/all', (err, data) ->
+  db.view 'user/all', (err, data) ->
+    return res.send err if err
     res.send _.map data, (doc) ->
       { _id: doc.id }
 
 User.get = (req, res, next) ->
-  console.log req.params.id
   db.get req.params.id, (err, data) ->
+    return res.send err if err
     res.send data
 
-User.add = (req, res, next) ->
-  db.save req.body, (err, data) ->
-    res.send data
+User.add = (newUser, next) ->
+  newUser.type = "user"
+  db.save newUser, (err, data) ->
+    return next 400, err if err
+    next data
 
 User.save = (req, res, next) ->
-  db.merge req.params.id, req.body, (err, data) ->
+  updatedUser = req.body
+  updatedUser.updateDate = new Date()
+  db.merge req.params.id, updatedUser, (err, data) ->
+    return res.send err if err
     res.send data
 
 User.delete = (req, res, next) ->
-  console.log req.params.id
   db.remove req.params.id, (err, data) ->
+    return res.send err if err
     res.send data
+
+# Populate design document
+db.save '_design/user',
+    views:
+      all:
+        map: (doc) ->
+          emit doc if doc.type == 'user'
 
 module.exports = User

@@ -35,7 +35,7 @@ Quote.delete = (req, res, next) ->
     return res.send err if err
     res.send data
 
-# Populate design documents
+# Populate design document
 db.save '_design/quote',
     views:
       all:

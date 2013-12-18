@@ -5,6 +5,7 @@ angular
       "ng"
       "ngCookies"
       "ngRoute"
+      "shame.header"
       "shame.feed"
     ])
   .config [

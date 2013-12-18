@@ -5,13 +5,12 @@ html(lang="fr", xmlns:ng="http://angularjs.org", ng-app="shame")
     title(ng-bind-template='{{pageTitle}}') Shame
     meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
     meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
-    link(href="http://fonts.googleapis.com/css?family=Sacramento|Roboto:300", rel="stylesheet")
+    link(href="https://fonts.googleapis.com/css?family=Sacramento|Roboto:300", rel="stylesheet")
     link(rel="stylesheet", href="css/shame.css")
   body
     .container
-      a.title(href="#")
-        h1 Shame
-      .ng-view
+      shame-header
+      section.ng-view
     script.
       window.brunch = window.brunch || {};
       window.brunch["auto-reload"] = {
