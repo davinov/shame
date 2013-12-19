@@ -1,4 +1,5 @@
 a.title(href="#") Shame
 ul.actions.navbar-right
   li
-    a.login(href="auth/facebook") Login with Facebook
+    a.login(href="auth/facebook", ng-if="!user") Login with Facebook
+    a.user(href="#", ng-if="user") {{ user.displayName }}

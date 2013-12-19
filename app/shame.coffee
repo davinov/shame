@@ -7,6 +7,7 @@ angular
       "ngRoute"
       "shame.header"
       "shame.feed"
+      "shame.user"
     ])
   .config [
     "$routeProvider"

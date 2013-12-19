@@ -8,3 +8,5 @@ module.exports=
   facebook:
     clientID: 123456789
     clientSecret: "TO CHANGE"
+  cookies:
+    secret: 'lolcat'

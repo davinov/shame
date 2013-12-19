@@ -4,13 +4,18 @@ passport = require 'passport'
 facebook = require 'passport-facebook'
 config = require 'config'
 
+User = require './user/User'
 Quote = require './quote/Quote'
 
 # Configuration
 shameApi = express()
 shameApi.set 'title', 'Shame'
+shameApi.use express.cookieParser()
 shameApi.use express.bodyParser()
+shameApi.use express.session
+  secret: config.cookies.secret
 shameApi.use passport.initialize()
+shameApi.use passport.session()
 
 # Frontend
 shameApi.use express.static path.join __dirname, "../_public"
@@ -22,15 +27,19 @@ shameApi.get '/', (req, res) ->
 passport.use new facebook.Strategy
   clientID: config.facebook.clientID,
   clientSecret: config.facebook.clientSecret,
-  callbackURL: "/auth/facebook/callback"
+  callbackURL: '/auth/facebook/callback'
 ,
-  (accessToken, refreshToken, profile, done) ->
-    done(profile)
+(accessToken, refreshToken, profile, done) ->
+  done null, profile
 
 shameApi.get '/auth/facebook', passport.authenticate 'facebook'
 shameApi.get '/auth/facebook/callback', passport.authenticate 'facebook',
-    successRedirect: '/'
-    failureRedirect: '/'
+  successRedirect: '/'
+  failureRedirect: '/'
+passport.serializeUser (user, done) ->
+  done null, user
+passport.deserializeUser (obj, done) ->
+  done null, obj
 
 # API routes
 shameApi.use express.logger()
@@ -39,6 +48,7 @@ shameApi.get '/quote/:id', Quote.get
 shameApi.post '/quote', Quote.add
 shameApi.post '/quote/:id', Quote.save
 shameApi.delete '/quote/:id', Quote.delete
+shameApi.get '/me', User.get
 
 shameApi.start = (port = 3333, path, callback) ->
   shameApi.listen port, callback
