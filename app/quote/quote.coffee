@@ -12,9 +12,9 @@ angular
     )
   ])
   .controller("quoteController", ["$scope", "$routeParams", "Quote", ($scope, $routeParams, Quote) ->
-      $scope.quote ?= new Quote()
+      $scope.quote ?= new Quote($scope.quote)
       $scope.quote._id ?= $routeParams.id
-      $scope.quote.$get()
+      $scope.quote.$get() if !$scope.quote.text
 
       $scope.delete = () ->
         $scope.quote.$delete (res) ->

@@ -1,7 +1,7 @@
 express = require 'express'
 path = require 'path'
 passport = require 'passport'
-facebook = require 'passport-facebook'
+facebookStrategy = require 'passport-facebook'
 config = require 'config'
 
 User = require './user/User'
@@ -24,12 +24,14 @@ shameApi.get '/', (req, res) ->
     root: path.join __dirname, '../_public'
 
 # Authentication
-passport.use new facebook.Strategy
+passport.use new facebookStrategy.Strategy
+  profileFields: ['id', 'displayName', 'photos', 'friends']
   clientID: config.facebook.clientID,
   clientSecret: config.facebook.clientSecret,
   callbackURL: '/auth/facebook/callback'
 ,
 (accessToken, refreshToken, profile, done) ->
+  User.findOrCreate profile
   done null, profile
 
 shameApi.get '/auth/facebook', passport.authenticate 'facebook'
@@ -48,7 +50,8 @@ shameApi.get '/quote/:id', Quote.get
 shameApi.post '/quote', Quote.add
 shameApi.post '/quote/:id', Quote.save
 shameApi.delete '/quote/:id', Quote.delete
-shameApi.get '/me', User.get
+shameApi.get '/me', User.me
+shameApi.get '/user/:id', User.get
 
 shameApi.start = (port = 3333, path, callback) ->
   shameApi.listen port, callback

@@ -4,10 +4,12 @@ _ = require 'underscore'
 Quote = {}
 
 Quote.list = (req, res, next) ->
-  db.view 'quote/all', (err, data) ->
+  db.view 'quote/all' ,
+    limit: 100
+    descending: true
+  , (err, data) ->
     return res.send err if err
-    res.send _.map data, (doc) ->
-      { _id: doc.id }
+    res.send _.pluck data, 'value'
 
 Quote.get = (req, res, next) ->
   db.get req.params.id, (err, data) ->
@@ -15,6 +17,7 @@ Quote.get = (req, res, next) ->
     res.send data
 
 Quote.add = (req, res, next) ->
+  return res.send 401 if not req.user?
   newQuote = req.body
   newQuote.creationDate = new Date()
   newQuote.updateDate = newQuote.creationDate
@@ -39,19 +42,21 @@ Quote.delete = (req, res, next) ->
 db.save '_design/quote',
     views:
       all:
+        descending: true
         map: (doc) ->
-          emit doc if doc.type == 'quote'
+          emit doc.creationDate, doc if doc.type == 'quote'
       byAuthor:
         map: (doc) ->
-          emit doc if doc.type == 'quote' and doc.author == 'Author'
+          emit doc.author, doc if doc.type == 'quote'
     validate_doc_update: (newDoc, oldDoc) ->
-      # should have a text
-      if not newDoc.text? or not newDoc.text or newDoc.text == ''
-        throw
-          forbidden: 'Quote\ must\ not\ be\ empty'
-      # should have a creation date
-      if not newDoc.creationDate?
-        throw
-          forbidden: 'The\ creation\ date\ should\ not\ be\ empty'
+      if newDoc.type == 'quote'
+        # should have a text
+        if not newDoc.text? or not newDoc.text or newDoc.text == ''
+          throw
+            forbidden: 'Quote\ must\ not\ be\ empty'
+        # should have a creation date
+        if not newDoc.creationDate?
+          throw
+            forbidden: 'The\ creation\ date\ should\ not\ be\ empty'
 
 module.exports = Quote
