@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/davinov/shame.png?label=ready)](https://waffle.io/davinov/shame)  
 # angular-brunch-seed
 ### A starter project for AngularJS using Brunch.io
 
