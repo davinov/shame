@@ -10,28 +10,13 @@ set :format, :pretty
 # set :log_level, :debug
 set :pty, true
 
-# set :linked_files, %w{config/database.yml}
-# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_files, %w{config/default.coffee config/production.coffee}
+set :linked_dirs, %w{node_modules bower_components}
 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-# set :keep_releases, 5
+set :keep_releases, 5
 
 namespace :deploy do
-
-  namespace :npm do
-
-    desc 'Install dependencies'
-    task :install do
-      on roles(:app), in: :sequence, wait: 5 do
-        within "#{release_path}" do
-          execute :npm, 'install'
-        end
-      end
-    end
-
-  after "deploy:npm:install", "deploy:restart"
-
-  end
 
   desc 'Restart application'
   task :restart do

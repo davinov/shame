@@ -1,5 +1,6 @@
 # Shame
 A website to share epic sentences out of their context
+[![Stories in Backlog](https://badge.waffle.io/davinov/shame.png?label=to-do)](https://waffle.io/davinov/shame) 
 
 ## Installation
 To run locally:
