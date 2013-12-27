@@ -10,6 +10,7 @@ Quote = require './quote/Quote'
 # Configuration
 shameApi = express()
 shameApi.set 'title', 'Shame'
+shameApi.set 'trust proxy', true
 shameApi.use express.cookieParser()
 shameApi.use express.bodyParser()
 shameApi.use express.session
