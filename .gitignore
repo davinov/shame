@@ -13,7 +13,10 @@ _public
 node_modules/*
 npm-debug.log
 
+config/runtime.json
+
 test/test-results.xml
+coverage/
 
 # Bower stuff.
 bower_components/

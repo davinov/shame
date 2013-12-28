@@ -1,0 +1,4 @@
+div(ng-include="'quote/new.html'", ng-if="user")
+.feed
+  div(ng-repeat="quote in quotes")
+    shame-quote(quote="quote")

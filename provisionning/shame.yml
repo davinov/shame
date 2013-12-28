@@ -1,0 +1,22 @@
+---
+- hosts: all
+  vars:
+    port: 80
+    host: shame.nowinsky.net
+    docroot: /var/www/shame/current
+    nodeport: 3333
+    couchuser: shame
+    couchpassword: prodPassword
+  sudo: yes
+  tasks:
+    - name: Apt | Install base packages
+      apt: pkg=$item state=present update_cache=yes
+      sudo: true
+      with_items:
+        - git
+    - include: apache/tasks.yml
+    - include: node/tasks.yml
+    - include: couchdb/tasks.yml
+  handlers:
+    - include: apache/handlers.yml
+    - include: couchdb/handlers.yml

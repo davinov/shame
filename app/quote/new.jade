@@ -1,0 +1,12 @@
+blockquote.quote(ng-controller="newQuoteController")
+  alert(alert="alert")
+  form
+    .form-group
+      label(for="text") Quote
+      textarea.text(name="quote.text", placeholder="What did (s)he say?", ng-model="quote.text")
+    .form-group
+      label(for="author") Author
+      input.author(type="quote.text", name="author", placeholder ="Who said that?", ng-model="quote.author")
+    button(type="submit", ng-click="send()")
+      i.glyphicon.glyphicon-send
+      |  Send

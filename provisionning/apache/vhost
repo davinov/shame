@@ -1,0 +1,18 @@
+<VirtualHost {{ interfaces|default('*') }}:{{ port|default('80') }}>
+    ServerName {{ host }}
+
+    ProxyRequests On
+
+    <Proxy *>
+            Order deny,allow
+            Allow from all
+    </Proxy>
+
+    <Location />
+            ProxyPass http://localhost:{{ nodeport|default('3333') }}/
+            ProxyPassReverse http://localhost:{{ nodeport|default('3333') }}/
+    </Location>
+
+    CustomLog ${APACHE_LOG_DIR}/access_{{ host }}.log combined
+    ErrorLog ${APACHE_LOG_DIR}/error_{{ host }}.log
+</VirtualHost>

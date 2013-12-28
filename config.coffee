@@ -10,27 +10,19 @@ exports.config =
   files:
     javascripts:
       joinTo:
-        'js/app.js': /^app/
+        'js/shame.js': /^app/
         'js/vendor.js': /^(bower_components|vendor)/
 
     stylesheets:
       joinTo:
-        'css/app.css': /^(app|vendor|bower_components)/
-      order:
-        before: [
-          'app/styles/app.less'
-        ]
+        'css/shame.css': /^(app|vendor|bower_components)/
 
     templates:
       joinTo: 
         'js/dontUseMe' : /^app/ # dirty hack for Jade compiling.
 
-  plugins:
-    jade:
-      pretty: yes # Adds pretty-indentation whitespaces to output (false by default)
-    jade_angular:
-      modules_folder: 'partials'
-      locals: {}
+  server:
+    path: 'server.coffee'
 
   # Enable or disable minifying of result js / css files.
   # minify: true

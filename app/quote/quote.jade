@@ -1,0 +1,14 @@
+alert(alert="alert")
+blockquote(ng-if="quote.text")
+  .quote 
+    span.author {{ quote.author }} 
+    span.text {{ quote.text }}
+  .infos reported 
+    time-ago(date="quote.creationDate")
+  .actions
+    button.delete(ng-click="delete()")
+      i.glyphicon.glyphicon-remove
+      span  Delete
+    a.permalink(href="#/quote/{{quote._id}}")
+      i.glyphicon.glyphicon-link
+      span  Permalink

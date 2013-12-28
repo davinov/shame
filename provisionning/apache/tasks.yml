@@ -1,0 +1,25 @@
+---
+- name: Apache | Install
+  apt: pkg=$item state=latest update_cache=yes
+  with_items:
+  - apache2
+
+- name: Apache | Activate modules
+  action: file state=link src=/etc/apache2/mods-available/$item path=/etc/apache2/mods-enabled/$item
+  with_items:
+  - rewrite.load
+  - proxy.conf
+  - proxy.load
+  - proxy_http.load
+  notify:
+  - apache-restart
+
+- name: Apache | Virtualhost add | Push virtualhost configuration template
+  template: src=apache/vhost dest=/etc/apache2/sites-available/$host
+  notify:
+  - apache-restart
+
+- name: Apache | Virtualhost add | Activate virtual host $vhost
+  command: /usr/sbin/a2ensite $host creates=/etc/apache2/sites-enabled/$host
+  notify:
+  - apache-restart

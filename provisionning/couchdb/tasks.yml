@@ -1,0 +1,12 @@
+---
+- name: CouchDB | Install
+  apt: pkg=$item state=latest update_cache=yes
+  with_items:
+  - couchdb
+  notify:
+  - couchdb-restart
+
+- name: CouchDB | Configure
+  template: src=couchdb/config.ini dest=/etc/couchdb/local.ini
+  notify:
+  - couchdb-restart

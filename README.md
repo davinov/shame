@@ -1,3 +1,30 @@
+# Shame
+A website to share epic sentences out of their context
+[![Stories in Backlog](https://badge.waffle.io/davinov/shame.png?label=to-do)](https://waffle.io/davinov/shame) 
+
+## Installation
+To run locally:
+* Install npm/node and brunch
+* Install CouchDB `sudo apt-get install couchdb -y`
+  * Navigate in [CouchDB Futon interface](http://localhost:5984/_utils)
+  * Create the database `shame-quotes`
+  * In configuration, set `httpd.enable_cors` to `true`
+  * Add the key `cors.origins` with the value `localhost:3333` (or `*` if lazy)
+* install dependencies and generate the project files `npm install`
+
+To provision your server with ansible:
+* Customize `provisioning/hosts`
+* Run `ansible-playbook -i provisionning/hosts provisionning/shame.yml`
+
+To provision a vagrant box:
+* Write your `Vagrantfile` with ansible playbook `provisionning/hosts provisionning/shame.yml`
+* `vagrant up`
+* `vagrant provision`
+
+## Usage
+`npm start` to start development server
+
+Created with:
 # angular-brunch-seed
 ### A starter project for AngularJS using Brunch.io
 
