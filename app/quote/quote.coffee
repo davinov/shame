@@ -24,7 +24,7 @@ angular
         , (err) ->
           $scope.alert =
             type: "error"
-            message: err.reason
+            message: err.data
     ]
   )
   .directive("shameQuote", ->
