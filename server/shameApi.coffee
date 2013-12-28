@@ -43,15 +43,18 @@ passport.serializeUser (user, done) ->
   done null, user
 passport.deserializeUser (obj, done) ->
   done null, obj
+ensureAuthenticated = (req, res, next) ->
+  return next() if req.isAuthenticated()
+  res.send 401, "You're not authenticated."
 
 # API routes
 shameApi.use express.logger()
 shameApi.get '/feed', Quote.list
-shameApi.get '/quote/:id', Quote.get
-shameApi.post '/quote', Quote.add
-shameApi.post '/quote/:id', Quote.save
-shameApi.delete '/quote/:id', Quote.delete
-shameApi.get '/me', User.me
+shameApi.get '/quote/:id', Quote.get, Quote.send
+shameApi.post '/quote', ensureAuthenticated, Quote.add, Quote.send
+shameApi.post '/quote/:id', ensureAuthenticated, Quote.get, Quote.ensureReporter, Quote.save, Quote.send
+shameApi.delete '/quote/:id', ensureAuthenticated, Quote.get, Quote.ensureReporter, Quote.delete, Quote.send
+shameApi.get '/me', ensureAuthenticated, User.me
 shameApi.get '/user/:id', User.get
 
 shameApi.start = (port = 3333, path, callback) ->

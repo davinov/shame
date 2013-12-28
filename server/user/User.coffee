@@ -22,10 +22,15 @@ User.findOrCreate = (profile) ->
 User.me = (req, res, next) ->
   if req.user
     req.params.id = req.user.id
-    return User.get req, res, next
+    return User.getByFacebookId req, res, next
   return res.send 401
 
 User.get = (req, res, next) ->
+  db.get req.params.id, (err, data) ->
+    return res.send err if err
+    res.send data
+
+User.getByFacebookId = (req, res, next) ->
   db.view 'user/byFacebookId', { key: req.params.id }, (err, data) ->
     return res.send err if err
     res.send _.pluck(data, 'value')[0]
@@ -41,7 +46,7 @@ db.save '_design/user',
         emit doc.facebookId, doc if doc.type == 'user'
   validate_doc_update: (newDoc, oldDoc) ->
     if newDoc.type == 'user'
-      # should have an id
+      # should have a facebook id
       if not newDoc.facebookId? or not newDoc.facebookId or newDoc.facebookId == ''
         throw
         forbidden: 'User\ must\ have\ a\ Facebook\ id'

@@ -14,29 +14,41 @@ Quote.list = (req, res, next) ->
 Quote.get = (req, res, next) ->
   db.get req.params.id, (err, data) ->
     return res.send err if err
-    res.send data
+    req.quote = data
+    next()
+
+Quote.send = (req, res, next) ->
+  res.send req.quote
+
+Quote.ensureReporter = (req, res, next) ->
+  return res.send 401, "You can't modify or delete a quote that you haven't reported." if req.user.id != req.quote.reportedBy
+  next()
 
 Quote.add = (req, res, next) ->
-  return res.send 401 if not req.user?
   newQuote = req.body
   newQuote.creationDate = new Date()
   newQuote.updateDate = newQuote.creationDate
+  newQuote.reportedBy = req.user.id
   newQuote.type = "quote"
   db.save newQuote, (err, data) ->
     return res.send 400, err if err
-    res.send data
+    req.quote = data
+    next()
 
 Quote.save = (req, res, next) ->
   updatedQuote = req.body
   updatedQuote.updateDate = new Date()
-  db.merge req.params.id, updatedQuote, (err, data) ->
+  db.merge req.quote.id, updatedQuote, (err, data) ->
     return res.send err if err
-    res.send data
+    req.quote = data
+    next()
 
 Quote.delete = (req, res, next) ->
-  db.remove req.params.id, (err, data) ->
+  console.log req.quote
+  db.remove req.quote.id, (err, data) ->
     return res.send err if err
-    res.send data
+    req.quote = data
+    next()
 
 # Populate design document
 db.save '_design/quote',
@@ -58,5 +70,9 @@ db.save '_design/quote',
         if not newDoc.creationDate?
           throw
             forbidden: 'The\ creation\ date\ should\ not\ be\ empty'
+        # should have been reported by someone
+        if not newDoc.reportedBy?
+          throw
+            forbidden: 'You\ must\ be\ authenticated\ to\ submit\ a\ quote'
 
 module.exports = Quote
