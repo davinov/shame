@@ -65,14 +65,26 @@ db.save '_design/quote',
         # should have a text
         if not newDoc.text? or not newDoc.text or newDoc.text == ''
           throw
-            forbidden: 'Quote\ must\ not\ be\ empty'
+            forbidden: 'Quote must not be empty'
         # should have a creation date
         if not newDoc.creationDate?
           throw
-            forbidden: 'The\ creation\ date\ should\ not\ be\ empty'
+            forbidden: 'The creation date should not be empty'
         # should have been reported by someone
         if not newDoc.reportedBy?
           throw
-            forbidden: 'You\ must\ be\ authenticated\ to\ submit\ a\ quote'
+            forbidden: 'You must be authenticated to submit a quote'
+        # should have an author
+        if not newDoc.author?
+          throw
+            forbidden: 'Invalid author: did you choose it from the list?'
+        # should have an author's name
+        if not newDoc.author.name?
+          throw
+          forbidden: 'Invalid author\'s name'
+        # should have an author's id
+        if not newDoc.author.id?
+          throw
+          forbidden: 'Invalid author\'s facebook id'
 
 module.exports = Quote

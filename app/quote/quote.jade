@@ -1,7 +1,8 @@
-alert(alert="alert")
+alert(ng-if="alert", type="alert.type") {{ alert.msg }}
 blockquote(ng-if="quote.text")
-  .quote 
-    span.author {{ quote.author }} 
+  profile-pic(facebook-id="quote.author.id")
+  .quote
+    span.author {{ quote.author.name }}
     span.text {{ quote.text }}
   .infos reported 
     time-ago(date="quote.creationDate")

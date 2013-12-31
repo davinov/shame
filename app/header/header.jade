@@ -3,5 +3,5 @@ ul.actions.navbar-right
   li
     a.login(href="auth/facebook", ng-if="!user") Login with Facebook
     a.user(href="#", ng-if="user")
-      img.photo(ng-src="{{user.photo}}", ng-if="user.photo")
+      profile-pic(facebook-id="user.facebookId")
       | {{ user.displayName }}

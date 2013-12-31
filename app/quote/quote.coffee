@@ -1,9 +1,11 @@
 angular
   .module("shame.quote", [
-    "shame.alert"
     "ngRoute"
     "ngResource"
+    "ui.bootstrap.alert"
     "shame.moment"
+    "shame.friends-autocomplete"
+    "shame.facebook-profilepic"
   ])
   .config(["$routeProvider", ($routeProvider) ->
     $routeProvider.when('/quote/:id', 
@@ -20,11 +22,11 @@ angular
         $scope.quote.$delete (res) ->
           $scope.alert =
             type: "success"
-            message: "This quote have been successfully forgotten!"
+            msg: "This quote have been successfully forgotten!"
         , (err) ->
           $scope.alert =
             type: "error"
-            message: err.data
+            msg: err.data
     ]
   )
   .directive("shameQuote", ->
@@ -42,13 +44,13 @@ angular
         $scope.quote.$save (res) ->
           $scope.alert =
             type: "success"
-            message: "Thank you for adding this quote!"
+            msg: "Thank you for adding this quote!"
           $scope.quote = new Quote()
         , (err) ->
           $scope.alert =
             type: "error"
-            message: "Error"
-          $scope.alert.message += ": " + err.data.reason if err.data.reason
+            msg: "Error"
+          $scope.alert.msg += ": " + err.data.reason if err.data.reason
     ]
   )
   .factory('Quote', [ '$resource', ($resource) ->

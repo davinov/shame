@@ -18,7 +18,9 @@
     "angular-route": "~1.2",
     "angular-sanitize": "~1.2",
     "underscore": "~1.5",
-    "momentjs": "~2.4.0"
+    "momentjs": "~2.4.0",
+    "angular-bootstrap": "~0.9.0",
+    "angular-easyfb": "~0.2.1"
   },
   "overrides": {
     "angular-mocks": {

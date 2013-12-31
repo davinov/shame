@@ -13,7 +13,6 @@ User.findOrCreate = (profile) ->
         displayName: profile.displayName
         registrationDate: new Date()
         type: 'user'
-      newUser.photo = profile.photos[0].value if profile.photos[0]? if profile.photos?
       newUser.updateDate = newUser.registrationDate
       db.save newUser, (err, data) ->
         return console.log data if err
@@ -49,14 +48,14 @@ db.save '_design/user',
       # should have a facebook id
       if not newDoc.facebookId? or not newDoc.facebookId or newDoc.facebookId == ''
         throw
-        forbidden: 'User\ must\ have\ a\ Facebook\ id'
+        forbidden: 'User must have a Facebook id'
       # should have a display name
       if not newDoc.displayName? or not newDoc.displayName or newDoc.displayName == ''
         throw
-        forbidden: 'User\ must\ have\ a\ display\ name'
+        forbidden: 'User must have a display name'
       # should have a creation date
       if not newDoc.registrationDate?
         throw
-        forbidden: 'The\ registration\ date\ should\ not\ be\ empty'
+        forbidden: 'The registration date should not be empty'
 
 module.exports = User

@@ -1,0 +1,1 @@
+input(type="text", ng-model="model", ng-value="model.id", typeahead="friend as friend.name for friend in friends | filter:{name:$viewValue} | limitTo:8", typeahead-editable="false", typeahead-template-url="common/friends-autocomplete/friend.html", typeahead-wait-ms=300)
