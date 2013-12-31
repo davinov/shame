@@ -2,12 +2,14 @@
 
   blockquote{
 
-    .actions{
-      display: none;
-    }
-    &:hover{
+    @media (min-width: @screen-sm-min){
       .actions{
-        display: block;
+        display: none;
+      }
+      &:hover{
+        .actions{
+          display: block;
+        }
       }
     }
 

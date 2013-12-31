@@ -3,6 +3,7 @@ angular
     "ngRoute"
     "ngResource"
     "ui.bootstrap.alert"
+    "ezfb"
     "shame.moment"
     "shame.friends-autocomplete"
     "shame.facebook-profilepic"
@@ -13,10 +14,16 @@ angular
       controller: 'quoteController'
     )
   ])
-  .controller("quoteController", ["$scope", "$routeParams", "Quote", ($scope, $routeParams, Quote) ->
+  .controller("quoteController", ["$scope", "$location", "$routeParams", "$FB", "Quote", ($scope, $location, $routeParams, $FB, Quote) ->
       $scope.quote ?= new Quote($scope.quote)
       $scope.quote._id ?= $routeParams.id
       $scope.quote.$get() if !$scope.quote.text
+      $scope.url = $location.absUrl().replace /#.*/, "#/quote/" + $scope.quote._id
+      $FB.getLoginStatus (res) ->
+        if res.status != "connected"
+          throw $scope.alert =
+            type: "error"
+            msg: "You're not connected with Facebook."
 
       $scope.delete = () ->
         $scope.quote.$delete (res) ->

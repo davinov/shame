@@ -7,9 +7,14 @@ blockquote(ng-if="quote.text")
   .infos reported 
     time-ago(date="quote.creationDate")
   .actions
+    div.fb-like(
+      data-href="{{url}}"
+      data-layout="button_count"
+      data-send="false"
+      )
     button.delete(ng-click="delete()")
       i.glyphicon.glyphicon-remove
-      span  Delete
-    a.permalink(href="#/quote/{{quote._id}}")
+      span.action-text  Delete
+    a.permalink(href="{{url}}")
       i.glyphicon.glyphicon-link
-      span  Permalink
+      span.action-text  Permalink
