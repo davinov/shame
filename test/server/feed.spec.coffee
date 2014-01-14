@@ -1,4 +1,4 @@
-should = require('chai').should
+chai = require('chai').should()
 request = require 'supertest'
 _ = require 'underscore'
 
@@ -16,9 +16,10 @@ module.exports = (url) ->
           done()
 
       it 'should respond', (done) ->
-        response.should.have.status 200
+        "1".should.be.ok
+        response.should.have.property 'status', 200
         done()
 
       it 'should be an array', (done) ->
-        response.body.should.be.instanceof Array
+        response.body.should.be.an.instanceof Array
         done()

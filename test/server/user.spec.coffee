@@ -1,5 +1,5 @@
 should = require('chai').should
-request = require 'superagent'
+request = require 'supertest'
 _ = require 'underscore'
 
 module.exports = (url) ->
