@@ -5,3 +5,8 @@ node_js:
 
 services:
   - couchdb
+
+before_script:
+  - curl -X PUT http://localhost:5984/_config/httpd/enable_cors -d "true"
+  - curl -X PUT http://localhost:5984/_config/cors/origins -d '"localhost:3333"'
+  - curl -X PUT localhost:5984/_config/admins/shame -d '"devPassword"'
