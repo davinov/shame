@@ -1,7 +1,7 @@
 // Karma configuration
 
 module.exports = function(karma) {
-  karma.configure({
+  karma.set({
 
     // base path, that will be used to resolve files and exclude
     basePath: '../',
@@ -13,8 +13,8 @@ module.exports = function(karma) {
 
     // list of files / patterns to load in the browser
     files: [
-        'test/e2e/**/*.js',
-        'test/e2e/**/*.coffee'
+        'test/e2e/*.js',
+        'test/e2e/*.coffee'
     ],
 
     // list of files to exclude

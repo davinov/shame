@@ -19,7 +19,7 @@ shameApi.use passport.initialize()
 shameApi.use passport.session()
 
 # Frontend
-shameApi.use express.static path.join __dirname, "../_public"
+shameApi.use express.static path.join __dirname, '../_public'
 shameApi.get '/', (req, res) ->
   res.sendfile 'index.html',
     root: path.join __dirname, '../_public'
@@ -45,7 +45,7 @@ passport.deserializeUser (obj, done) ->
   done null, obj
 ensureAuthenticated = (req, res, next) ->
   return next() if req.isAuthenticated()
-  res.send 401, "You're not authenticated."
+  res.send 401, 'You\'re not authenticated.'
 
 # API routes
 shameApi.use express.logger()

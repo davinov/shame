@@ -4,7 +4,7 @@ _ = require 'underscore'
 Quote = {}
 
 Quote.list = (req, res, next) ->
-  db.view 'quote/all' ,
+  db.view 'quote/all',
     limit: 100
     descending: true
   , (err, data) ->

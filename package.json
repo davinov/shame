@@ -10,8 +10,8 @@
   },
   "scripts": {
     "preinstall": "scripts/clean.sh",
-    "postinstall": "scripts/install.sh",
-    "postupdate": "scripts/install.sh",
+    "postinstall": "scripts/postinstall.sh",
+    "postupdate": "scripts/postinstall.sh",
     "start": "scripts/server.sh",
     "stop": "scripts/stop.sh",
     "test": "scripts/test.sh",
@@ -31,9 +31,6 @@
     "clean-css-brunch": ">= 1.0 < 1.8",
     "bower": "~1.0",
     "jade-angularjs-brunch": "~0.0.5",
-    "karma": "~0.9.4",
-    "karma-coffee-preprocessor": "~0.0.2",
-    "karma-ng-scenario": "~0.0.2",
     "config": "~0.4.33",
     "cradle": "~0.6.6",
     "express": "~3.4.4",
@@ -44,6 +41,15 @@
     "passport-facebook": "~1.0.2"
   },
   "devDependencies": {
-    "karma-coverage": "~0.1.2"
+    "karma-coverage": "~0.1.2",
+    "karma": "~0.9.4",
+    "karma-coffee-preprocessor": "~0.0.2",
+    "karma-ng-scenario": "~0.0.2",
+    "mocha": "~1.16.2",
+    "supertest": "~0.8.3",
+    "karma-growl": "~0.1.0",
+    "chai": "~1.8.1",
+    "karma-mocha": "~0.1.1",
+    "karma-chai": "0.0.2"
   }
 }
