@@ -27,7 +27,7 @@ module.exports = (url) ->
           done()
 
       it 'should respond', (done) ->
-        response.should.have.status 200
+        response.should.have.property 'status', 200
         done()
 
       it 'should contain a text', (done) ->
@@ -36,8 +36,6 @@ module.exports = (url) ->
 
       it 'should contain an author', (done) ->
         response.body.author.should.be.ok
-        response.body.author.should.have.properties [
-          'id'
-          'name'
-        ]
+        response.body.author.should.have.property 'id'
+        response.body.author.should.have.property 'name'
         done()
